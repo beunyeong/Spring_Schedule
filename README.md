@@ -1,6 +1,6 @@
 # Scheduler
 ## 1. API 명세서
-### schedules/users
+### users / schedules
 | 진행현황 | 분류 | 기능 | Method | URL | request | response | 상태코드
 |---|:---:|:---:|:---:|:------:|:----:|:---:|:---:|
 | 시작 전 | [회원 관리] | 회원 가입 | POST | /users | body | 회원가입 정보 | 200:정상 등록 |

@@ -20,6 +20,7 @@
 
 ## 3. SQL 쿼리 작성
 **1) Create**
+
 ■ 필수 기능 가이드 개발에 필요한 테이블을 생성하는 query를 작성
 <pre><code>	
 # Create users table
@@ -45,6 +46,7 @@ FOREIGN KEY (user_id) REFERENCES users (user_id)
 </code></pre>
 
 **2) Insert**
+
 ■  일정 생성을 하는 query를 작성
 <pre><code>
 INSERT INTO schedules (
@@ -64,6 +66,7 @@ VALUES(
 </code></pre>
 
 **3) Select**
+
 ■ 전체 일정을 조회하는 query를 작성
 <pre><code>
 SELECT *
@@ -72,6 +75,7 @@ ORDER BY start_date DESC;
 </code></pre>
 
 **4) Select**
+
 ■  선택 일정을 조회하는 query를 작성
 <pre><code>
 SELECT *
@@ -80,6 +84,7 @@ WHERE title='LV0 과제 제출';
 </code></pre>
 
 **5) update**
+
 ■  선택한 일정을 수정하는 query를 작성
 <pre><code>
 UPDATE schedules
@@ -88,6 +93,7 @@ WHERE title='LV0 과제 제출';
 </code></pre>
 
 **6) Delete**
+
 ■  선택한 일정을 삭제하는 query를 작성
 <pre><code>
 DELETE FROM users

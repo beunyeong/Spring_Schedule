@@ -12,7 +12,7 @@
 
 ***
 
-// request, response 어떤 값이 들어갈지 예제문제 만들기
+
 ### 1) 작성자 등록
 ▼ request(요청) 예시
 <pre><code>	
@@ -75,7 +75,7 @@
 </code></pre>
 
 ### 4)  전체 일정 조회
-▼ request(요청) : GET /schedules/{id}
+▼ request(요청) X : GET /schedules/{id}
 
 ▼ response(응답) 예시
 <pre><code>	
@@ -117,7 +117,7 @@
 ## 2. ERD
 ![image](https://github.com/user-attachments/assets/67f63b58-b9d0-40e2-9957-2f7fd295f8f6)
 
-// user_id 보다는 그냥 id로 -> schedule_id보다는 그냥 id 로  => 테이블이 다르기 떄문에 괜찮다.
+
 
 
 *** 
@@ -129,14 +129,11 @@
 <pre><code>	
 # Create users table
 CREATE TABLE users (
-name VARCHAR(30) NOT NULL,
 id INTEGER(30) PRIMARY KEY,
 password VARCHAR(20) NOT NULL,
 startDate DATETIME NOT NULL,
 endDate DATETIME NOT NULL,
 );
-// start_date  -> startDate로 수정
-// end_date -> endDate로 수정
   
 # Create schedules table
 CREATE schedules users (

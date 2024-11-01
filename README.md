@@ -3,11 +3,10 @@
 ### users / schedules
 | 진행현황 | 분류 | 기능 | Method | URL | request | response | 상태코드
 |---|:---:|:---:|:---:|:------:|:----:|:---:|:------------|
-| 시작 전 | users | 작성자 등록 | POST | /users | body | 작성자 정보 | 201: 리소스 생성 |
 | 시작 전 | schedules | 일정 등록 | POST | /schedules| body | 일정 등록 정보 | 201:리소스 생성 |
 | 시작 전 | schedules | 전체 일정 조회 | GET | /schedules | X | 다건 응답 정보 | 200:정상 조회, 404:지정 리소스 없음 |
 | 시작 전 | schedules | 선택 일정 조회 | GET | /schedules/{id} | X | 단건 응답 정보 | 200:정상 조회, 404:지정 리소스 없음 |
-| 시작 전 | schedules | 선택 일정 수정 | PUT | /schedules/{id} | X | 수정 정보 | 200:정상 수정, 401: 권한없음 |
+| 시작 전 | schedules | 선택 일정 수정 | PUT | /schedules/{id} | body(수정) | 수정 정보 | 200:정상 수정, 401: 권한없음 |
 | 시작 전 | schedules | 선택 일정 삭제 | DELETE | /schedules/{id} | X | 삭제 정보 | 200:정상 삭제, 401: 권한없음|
 
 ***
@@ -36,9 +35,8 @@
   "id" : "001",
   "title" : "LV0 과제 제출",
   "content" : "API명세서 작성해서 검사 받기",
-  "startDate" : "2024-11-01 14:00:00",
+  "create_date" : "2024-11-01 14:00:00",
   "endDate" : "2024-11-01 15:00:00",
-  "color" : "BLACK"
 }
 </code></pre>
 

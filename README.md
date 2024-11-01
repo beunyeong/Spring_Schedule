@@ -12,42 +12,25 @@
 ***
 
 
-### 1) 작성자 등록
+### 1) 일정등록
 ▼ request(요청) 예시
 <pre><code>	
 {
-"id":"00012",
-"password":"ydhja"
+  "title":"LV0 과제 제출",
+  "content":"API명세서 작성해서 검사 받기",
+  "create_date":now(),
+  "updated_date":now()
 }
 </code></pre>
 
-▼ response(응답) 예시 : HTTP /1.1 201 Created
+▼ response(응답) 예시 : HTTP 1.1 /201 Created
 <pre><code>	
 {
-"id":"001"
+  "id" : "001"
 }
 </code></pre>
 
-### 2) 일정등록
-▼ request(요청) 예시
-<pre><code>	
-{
-  "id" : "001",
-  "title" : "LV0 과제 제출",
-  "content" : "API명세서 작성해서 검사 받기",
-  "create_date" : "2024-11-01 14:00:00",
-  "endDate" : "2024-11-01 15:00:00",
-}
-</code></pre>
-
-▼ response(응답) 예시
-<pre><code>	
-{
-  "id" : "t01"
-}
-</code></pre>
-
-### 3)  전체 일정 조회
+### 2) 전체 일정 조회
 ▼ request(요청) : GET /schedules
 
 
@@ -58,9 +41,9 @@
   "id" : "001",
   "title" : "LV0 과제 제출",
   "content" : "API명세서 작성해서 검사 받기",
-  "startDate" : "2024-11-01 14:00:00",
-  "endDate" : "2024-11-01 15:00:00",
-  "color" : "BLACK" },
+  "create_date" : "2024-11-01 14:00:00", ----> 조회를 했을 때 
+  "endDate" : "2024-11-01 15:00:00"
+  },
   {
   "id" : "t02",
   "id" : "001",
@@ -137,7 +120,6 @@ CREATE schedules users (
 id INTEGER(30) NOT NULL,
 title VARCHAR(100) NOT NULL, 
 content VARCHAR(100) NOT NULL, 
-color VARCHAR(30) NOT NULL, 
 startDate DATETIME NOT NULL, 
 endDate DATETIME NOT NULL, 
 FOREIGN KEY (id) REFERENCES users (id)
@@ -153,14 +135,12 @@ title,
 content,
 startDate,
 endDate,
-color
 )
 VALUES(
 'LV0 과제 제출',
 'API명세서 작성하여 검사 받기',
-'2024-11-01 14:00:00',
-'2024-11-01 15:00:00',
-'RED'
+now(),
+now()
 );
 </code></pre>
 

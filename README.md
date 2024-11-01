@@ -115,8 +115,7 @@
 *** 
 
 ## 2. ERD
-![image](https://github.com/user-attachments/assets/67f63b58-b9d0-40e2-9957-2f7fd295f8f6)
-
+![image](https://github.com/user-attachments/assets/fdea908e-e0b0-4b45-a6bb-ad658840903b)
 
 
 

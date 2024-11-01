@@ -3,18 +3,62 @@
 ### users / schedules
 | 진행현황 | 분류 | 기능 | Method | URL | request | response | 상태코드
 |---|:---:|:---:|:---:|:------:|:----:|:---:|:---:|
-| 시작 전 | users | 회원 가입 | POST | /users | body | 회원가입 정보 | 200:정상 등록 |
-| 시작 전 | users | 로그인 | POST | /users/login | body | 로그인 정보 | 200:정상 등록 |
-| 시작 전 | schedules | 일정 등록 | POST | /schedules| body | 스케줄 등록 정보 | 200:정상 등록 |
+| 시작 전 | users | 회원 가입 | POST | /users | body | 회원가입 정보 | 201: 리소스 생성 |
+| 시작 전 | schedules | 일정 등록 | POST | /schedules| body | 스케줄 등록 정보 | 201:리소스 생성 |
 | 시작 전 | schedules | 전체 일정 조회 | GET | /schedules | X | 다건 응답 정보 | 200:정상 조회 |
-| 시작 전 | schedules | 선택 일정 조회 | GET | /schedules{schedule_id} | body | 단건 응답 정보 | 200:정상 조회 |
-| 시작 전 | schedules | 선택 일정 수정 | PUT | /schedules{schedule_id} | body | 수정 정보 | 200:정상 수정 |
-| 시작 전 | schedules | 선택 일정 삭제 | DELETE | /schedules{schedule_id} | body | 삭제 정보 | 200:정상 삭제 |
+| 시작 전 | schedules | 선택 일정 조회 | GET | /schedules/{id} | body | 단건 응답 정보 | 200:정상 조회 |
+| 시작 전 | schedules | 선택 일정 수정 | PUT | /schedules/{id} | body | 수정 정보 | 200:정상 수정 |
+| 시작 전 | schedules | 선택 일정 삭제 | DELETE | /schedules/{id} | body | 삭제 정보 | 200:정상 삭제 |
+
+***
+
+// request, response 어떤 값이 들어갈지 예제문제 만들기
+### 1) 회원 가입
+▼ request(요청) 예시
+<pre><code>	
+{
+  "id" : "백*영",
+  "password" : "0000"
+}
+</code></pre>
+
+▼ response(응답) 예시
+<pre><code>	
+{
+"id" : "001"
+}
+</code></pre>
+
+### 2) 일정등록
+▼ request(요청) 예시
+<pre><code>	
+{
+  "id" : "001",
+  "title" : "LV0 과제 제출",
+  "content" : "API명세서 작성해서 검사 받기",
+  "startDate" : "2024-11-01 14:00:00",
+  "endDate" : "2024-11-01 15:00:00",
+  "color" : "RED"
+}
+</code></pre>
+
+▼ response(응답) 예시
+<pre><code>	
+{
+
+}
+</code></pre>
+
 
 *** 
 
 ## 2. ERD
-![img1 daumcdn](https://github.com/user-attachments/assets/d09e3320-dc5b-43f6-91ce-a7af03c52e75)
+![image](https://github.com/user-attachments/assets/9fcd3568-758a-4a0f-a09d-dcd7fee0ebe3)
+
+// user_id 보다는 그냥 id로 -> schedule_id보다는 그냥 id 로  => 테이블이 다르기 떄문에 괜찮
+// user_name 보다는 그냥 name으로
+
+
 
 *** 
 
@@ -25,23 +69,24 @@
 <pre><code>	
 # Create users table
 CREATE TABLE users (
-user_name VARCHAR NOT NULL,
-user_id INTEGER(30) PRIMARY KEY,
-user_password VARCHAR(20) NOT NULL,
-start_date DATETIME NOT NULL,
-end_date DATETIME NOT NULL,
+name VARCHAR(30) NOT NULL,
+id INTEGER(30) PRIMARY KEY,
+password VARCHAR(20) NOT NULL,
+startDate DATETIME NOT NULL,
+endDate DATETIME NOT NULL,
 );
-
+// start_date  -> startDate로 수정
+// end_date -> endDate로 수정
+  
 # Create schedules table
 CREATE schedules users (
-user_id INTEGER(30) NOT NULL,
-schedule_id INTEGER NOT NULL, 
+id INTEGER(30) NOT NULL,
 title VARCHAR(100) NOT NULL, 
 content VARCHAR(100) NOT NULL, 
-color VARCHAR NOT NULL, 
-start_date DATETIME NOT NULL, 
-end_date DATETIME NOT NULL, 
-FOREIGN KEY (user_id) REFERENCES users (user_id)
+color VARCHAR(30) NOT NULL, 
+startDate DATETIME NOT NULL, 
+endDate DATETIME NOT NULL, 
+FOREIGN KEY (id) REFERENCES users (id)
 );    
 </code></pre>
 
@@ -52,8 +97,8 @@ FOREIGN KEY (user_id) REFERENCES users (user_id)
 INSERT INTO schedules (
 title,
 content,
-start_date,
-end_date,
+startDate,
+endDate,
 color
 )
 VALUES(
@@ -71,7 +116,7 @@ VALUES(
 <pre><code>
 SELECT *
 FROM schedules
-ORDER BY start_date DESC;
+ORDER BY startDate DESC;
 </code></pre>
 
 **4) Select**
@@ -97,7 +142,7 @@ WHERE title='LV0 과제 제출';
 ■  선택한 일정을 삭제하는 query를 작성
 <pre><code>
 DELETE FROM users
-WHERE user_id = 1;
+WHERE id = 1;
 </code></pre>
 
 *** 

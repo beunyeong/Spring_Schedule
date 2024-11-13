@@ -2,6 +2,7 @@
 ## 1. API 명세서
 | 진행현황 | 분류 | 기능 | Method | URL | request | response | 상태코드
 |---|:---:|:---:|:---:|:------:|:----:|:---:|:------------|
+
 | 완료 | schedules | 일정 등록 | POST | /schedules| body | 일정 등록 정보 | 201(Created), 없음 |
 | 완료 | schedules | 전체 일정 조회 | GET | /schedules | Params | 다건 응답 정보 | 200(OK), 404(Not Found) |
 | 완료 | schedules | 선택 일정 조회 | GET | /schedules/{id} | body 없음 | 단건 응답 정보 | 200(OK), 404(Not Found) |
@@ -206,16 +207,29 @@
 **1) Create**
 
 ■ 필수 기능 가이드 개발에 필요한 테이블을 생성하는 query를 작성
-<pre><code>	 
-CREATE schedules users (
-id INTEGER(30) NOT NULL,
-password VARCHAR(20) NOT NULL,  
-title VARCHAR(100) NOT NULL, 
-content VARCHAR(100) NOT NULL, 
-createdate DATETIME NOT NULL,
-updateddate DATETIME NOT NULL,
-username VARCHAR(20) NOT NULL
-);    
+* User 테이블 생성
+<pre><code>
+CREATE TABLE User (
+user_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '유저 식별자',
+username VARCHAR(100) NOT NULL COMMENT '유저명',
+email VARCHAR(100) NOT NULL UNIQUE COMMENT  '이메일',
+password VARCHAR(50) NOT NULL COMMENT  '비밀번호',
+created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '등록일',
+updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일'
+); 
+</code></pre>
+
+* Schedule 테이블 생성
+<pre><code>
+CREATE TABLE Schedule (
+schedule_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '일정 식별자',
+user_id INT COMMENT '유저 식별자',
+title VARCHAR(100) NOT NULL COMMENT '일정 제목',
+description VARCHAR(200) NOT NULL COMMENT '일정 내용',
+created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '일정 작성일',
+updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '일정 수정일',
+FOREIGN KEY (user_id) REFERENCES User(user_id)  #user_id는 User 테이블의 user_id를 참조한다.
+);
 </code></pre>
 
 **2) Insert**
